@@ -42,7 +42,7 @@ if prompt := st.chat_input("메시지를 입력하세요..."):
         
         # 최신 무료 모델 'llama-3.3-70b-versatile' 사용
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",  # <--- 여기를 이렇게 바꾸세요!
+            model="llama-3.3-70b-versatile",
             messages=st.session_state.messages
         )
         
