@@ -40,9 +40,9 @@ if prompt := st.chat_input("메시지를 입력하세요..."):
             base_url="https://api.groq.com/openai/v1" 
         )
         
-        # 무료 모델인 'llama3-8b-8192' 사용
+        # 최신 무료 모델 'llama-3.3-70b-versatile' 사용
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",  # <--- 여기를 이렇게 바꾸세요!
             messages=st.session_state.messages
         )
         
