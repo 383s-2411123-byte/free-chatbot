@@ -5,13 +5,18 @@ from openai import OpenAI
 st.title("🦙 우리가 만든 무료 AI 챗봇")
 st.caption("Llama3 모델을 사용한 100% 무료 챗봇입니다!")
 
-# 2. 사이드바: API 키 입력받기
+# 2. 사이드바: API 키 설정 (자동 로그인 기능)
 with st.sidebar:
     st.header("설정")
-    # 여기서 입력받은 키를 사용합니다
-    groq_api_key = st.text_input("Groq API Key 입력", type="password")
-    st.markdown("[무료 키 발급받으러 가기](https://console.groq.com/keys)")
-    st.info("이 챗봇은 Groq API를 사용하여 돈이 들지 않습니다.")
+    
+    # 비밀 금고(Secrets)에 키가 있는지 확인
+    if "GROQ_API_KEY" in st.secrets:
+        groq_api_key = st.secrets["GROQ_API_KEY"]
+        st.success("✅ API 키가 자동으로 연결되었습니다!")
+    else:
+        # 금고에 없으면 직접 입력받기 (비상용)
+        groq_api_key = st.text_input("Groq API Key 입력", type="password")
+        st.markdown("[무료 키 발급받으러 가기](https://console.groq.com/keys)")
 
 # 3. 대화 기록(기억력) 초기화
 if "messages" not in st.session_state:
